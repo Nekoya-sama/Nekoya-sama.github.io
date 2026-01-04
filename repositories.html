@@ -470,11 +470,23 @@
     <script>
         let currentType = '';
         let editingId = null;
+        
+        // Helper function to get consistent localStorage key
+        function getStorageKey(type) {
+            const keyMap = {
+                'blog': 'blog-posts',
+                'project': 'projects',
+                'idea': 'ideas',
+                'update': 'updates'
+            };
+            return keyMap[type] || type + 's';
+        }
+        
         const storage = {
-            blog: JSON.parse(localStorage.getItem('blog-posts') || '[]'),
-            project: JSON.parse(localStorage.getItem('projects') || '[]'),
-            idea: JSON.parse(localStorage.getItem('ideas') || '[]'),
-            update: JSON.parse(localStorage.getItem('updates') || '[]')
+            blog: JSON.parse(localStorage.getItem(getStorageKey('blog')) || '[]'),
+            project: JSON.parse(localStorage.getItem(getStorageKey('project')) || '[]'),
+            idea: JSON.parse(localStorage.getItem(getStorageKey('idea')) || '[]'),
+            update: JSON.parse(localStorage.getItem(getStorageKey('update')) || '[]')
         };
 
         function openModal(type) {
@@ -509,7 +521,7 @@
                 storage[currentType].push(item);
             }
 
-            localStorage.setItem(`${currentType}${currentType === 'blog' ? '-posts' : 's'}`, JSON.stringify(storage[currentType]));
+            localStorage.setItem(getStorageKey(currentType), JSON.stringify(storage[currentType]));
             renderList(currentType);
             closeModal();
         }
@@ -527,17 +539,29 @@
         function deleteItem(type, id) {
             if (confirm('Are you sure you want to delete this item?')) {
                 storage[type] = storage[type].filter(i => i.id !== id);
-                localStorage.setItem(`${type}${type === 'blog' ? '-posts' : 's'}`, JSON.stringify(storage[type]));
+                localStorage.setItem(getStorageKey(type), JSON.stringify(storage[type]));
                 renderList(type);
             }
         }
 
         function renderList(type) {
-            const listId = type === 'blog' ? 'blog-list' : `${type}s-list`;
+            // Helper function to get list element ID
+            function getListId(type) {
+                const listIdMap = {
+                    'blog': 'blog-list',
+                    'project': 'projects-list',
+                    'idea': 'ideas-list',
+                    'update': 'updates-list'
+                };
+                return listIdMap[type];
+            }
+            
+            const listId = getListId(type);
             const list = document.getElementById(listId);
             
             if (storage[type].length === 0) {
-                list.innerHTML = `<div class="empty-state">No ${type}s yet. Click "Create New" to add your first ${type}!</div>`;
+                const typeDisplay = type === 'blog' ? 'blog post' : type;
+                list.innerHTML = `<div class="empty-state">No ${type}s yet. Click "Create New" to add your first ${typeDisplay}!</div>`;
                 return;
             }
 
