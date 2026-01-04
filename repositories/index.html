@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Nekoya-sama's Content Repositories">
-    <title>Repositories - Nekoya-sama</title>
+    <meta name="description" content="Create New Posts for Nekoya-sama's Website">
+    <title>Create Post - Nekoya-sama</title>
     <style>
         * {
             margin: 0;
@@ -378,7 +378,8 @@
         }
 
         .form-group input,
-        .form-group textarea {
+        .form-group textarea,
+        .form-group select {
             width: 100%;
             padding: 0.75rem;
             background: rgba(20, 25, 55, 0.6);
@@ -388,9 +389,36 @@
             font-family: inherit;
         }
 
+        .form-group select {
+            cursor: pointer;
+        }
+
         .form-group textarea {
-            min-height: 100px;
+            min-height: 150px;
             resize: vertical;
+            font-family: 'Courier New', monospace;
+        }
+
+        .preview-section {
+            background: rgba(20, 25, 55, 0.6);
+            border: 1px solid rgba(138, 147, 255, 0.2);
+            border-radius: 5px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .preview-section h3 {
+            color: #8a93ff;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .preview-content {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 5px;
+            min-height: 100px;
+            color: #c5ceff;
         }
 
         .form-actions {
@@ -453,7 +481,7 @@
                     <li><a href="../projects/">Projects</a></li>
                     <li><a href="../ideas/">Ideas</a></li>
                     <li><a href="../updates/">Updates</a></li>
-                    <li class="dev-only"><a href="../repositories/">Repositories</a></li>
+                    <li class="dev-only"><a href="../repositories/">Create Post</a></li>
                 </ul>
             </nav>
         </div>
@@ -462,68 +490,45 @@
     <main>
         <div class="container">
             <div class="page-header">
-                <h1>🗂️ Repositories</h1>
-                <p>Manage content for all sections of your website</p>
+                <h1>✏️ Create a New Post</h1>
+                <p>Create and publish content to your website</p>
             </div>
 
-            <!-- Blog Repository -->
+            <!-- Create Post Form -->
             <div class="repo-section">
-                <h2><span class="icon">📝</span> Blog Posts</h2>
-                <div class="content-list" id="blog-list">
-                    <div class="empty-state">No blog posts yet. Click "Create New" to add your first post!</div>
-                </div>
-                <button class="btn btn-primary" onclick="openModal('blog')">+ Create New Blog Post</button>
-            </div>
-
-            <!-- Projects Repository -->
-            <div class="repo-section">
-                <h2><span class="icon">🚀</span> Projects</h2>
-                <div class="content-list" id="projects-list">
-                    <div class="empty-state">No projects yet. Click "Create New" to add your first project!</div>
-                </div>
-                <button class="btn btn-primary" onclick="openModal('project')">+ Create New Project</button>
-            </div>
-
-            <!-- Ideas Repository -->
-            <div class="repo-section">
-                <h2><span class="icon">💡</span> Ideas</h2>
-                <div class="content-list" id="ideas-list">
-                    <div class="empty-state">No ideas yet. Click "Create New" to add your first idea!</div>
-                </div>
-                <button class="btn btn-primary" onclick="openModal('idea')">+ Create New Idea</button>
-            </div>
-
-            <!-- Updates Repository -->
-            <div class="repo-section">
-                <h2><span class="icon">✨</span> Updates</h2>
-                <div class="content-list" id="updates-list">
-                    <div class="empty-state">No updates yet. Click "Create New" to add your first update!</div>
-                </div>
-                <button class="btn btn-primary" onclick="openModal('update')">+ Create New Update</button>
+                <h2><span class="icon">📝</span> New Post</h2>
+                <form id="createPostForm" onsubmit="return handleCreatePost(event)">
+                    <div class="form-group">
+                        <label for="postTitle">Title</label>
+                        <input type="text" id="postTitle" placeholder="Enter the title for your new page" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="postContent">Content (HTML)</label>
+                        <textarea id="postContent" placeholder="Enter HTML content for your page" required></textarea>
+                    </div>
+                    <div class="form-actions" style="margin-bottom: 1rem;">
+                        <button type="button" class="btn btn-edit" onclick="togglePreview()">👁️ Toggle Preview</button>
+                    </div>
+                    <div id="previewSection" class="preview-section" style="display: none;">
+                        <h3>Preview</h3>
+                        <div id="previewContent" class="preview-content"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="postCategory">Category</label>
+                        <select id="postCategory" required>
+                            <option value="">Select a category</option>
+                            <option value="blog">Blog</option>
+                            <option value="ideas">Ideas</option>
+                            <option value="projects">Projects</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Publish Post</button>
+                    </div>
+                </form>
             </div>
         </div>
     </main>
-
-    <!-- Modal for Creating/Editing Content -->
-    <div class="modal" id="contentModal">
-        <div class="modal-content">
-            <h3 id="modalTitle">Create New Content</h3>
-            <form id="contentForm" onsubmit="return handleSubmit(event)">
-                <div class="form-group">
-                    <label for="contentTitle">Title</label>
-                    <input type="text" id="contentTitle" required>
-                </div>
-                <div class="form-group">
-                    <label for="contentDescription">Description</label>
-                    <textarea id="contentDescription" required></textarea>
-                </div>
-                <div class="form-actions">
-                    <button type="button" class="btn" onclick="closeModal()" style="background: rgba(138, 147, 255, 0.2); color: #8a93ff;">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
-            </form>
-        </div>
-    </div>
 
     <footer>
         <div class="container">
@@ -532,129 +537,59 @@
     </footer>
 
     <script>
-        let currentType = '';
-        let editingId = null;
-        
-        // Helper function to get consistent localStorage key
-        function getStorageKey(type) {
-            const keyMap = {
-                'blog': 'blog-posts',
-                'project': 'projects',
-                'idea': 'ideas',
-                'update': 'updates'
-            };
-            return keyMap[type] || type + 's';
-        }
-        
-        const storage = {
-            blog: JSON.parse(localStorage.getItem(getStorageKey('blog')) || '[]'),
-            project: JSON.parse(localStorage.getItem(getStorageKey('project')) || '[]'),
-            idea: JSON.parse(localStorage.getItem(getStorageKey('idea')) || '[]'),
-            update: JSON.parse(localStorage.getItem(getStorageKey('update')) || '[]')
-        };
-
-        function openModal(type) {
-            currentType = type;
-            editingId = null;
-            document.getElementById('modalTitle').textContent = `Create New ${type.charAt(0).toUpperCase() + type.slice(1)}`;
-            document.getElementById('contentTitle').value = '';
-            document.getElementById('contentDescription').value = '';
-            document.getElementById('contentModal').classList.add('active');
-        }
-
-        function closeModal() {
-            document.getElementById('contentModal').classList.remove('active');
-        }
-
-        function handleSubmit(event) {
-            event.preventDefault();
-            const title = document.getElementById('contentTitle').value;
-            const description = document.getElementById('contentDescription').value;
+        function togglePreview() {
+            const previewSection = document.getElementById('previewSection');
+            const contentInput = document.getElementById('postContent');
+            const previewContent = document.getElementById('previewContent');
             
-            const item = {
-                id: editingId || Date.now(),
-                title,
-                description,
-                date: new Date().toLocaleDateString()
-            };
-
-            if (editingId) {
-                const index = storage[currentType].findIndex(i => i.id === editingId);
-                storage[currentType][index] = item;
+            if (previewSection.style.display === 'none') {
+                previewSection.style.display = 'block';
+                previewContent.innerHTML = contentInput.value;
             } else {
-                storage[currentType].push(item);
-            }
-
-            localStorage.setItem(getStorageKey(currentType), JSON.stringify(storage[currentType]));
-            renderList(currentType);
-            closeModal();
-        }
-
-        function editItem(type, id) {
-            currentType = type;
-            editingId = id;
-            const item = storage[type].find(i => i.id === id);
-            document.getElementById('modalTitle').textContent = `Edit ${type.charAt(0).toUpperCase() + type.slice(1)}`;
-            document.getElementById('contentTitle').value = item.title;
-            document.getElementById('contentDescription').value = item.description;
-            document.getElementById('contentModal').classList.add('active');
-        }
-
-        function deleteItem(type, id) {
-            if (confirm('Are you sure you want to delete this item?')) {
-                storage[type] = storage[type].filter(i => i.id !== id);
-                localStorage.setItem(getStorageKey(type), JSON.stringify(storage[type]));
-                renderList(type);
+                previewSection.style.display = 'none';
             }
         }
 
-        function renderList(type) {
-            // Helper function to get list element ID
-            function getListId(type) {
-                const listIdMap = {
-                    'blog': 'blog-list',
-                    'project': 'projects-list',
-                    'idea': 'ideas-list',
-                    'update': 'updates-list'
-                };
-                return listIdMap[type];
-            }
+        function handleCreatePost(event) {
+            event.preventDefault();
             
-            const listId = getListId(type);
-            const list = document.getElementById(listId);
+            const title = document.getElementById('postTitle').value;
+            const content = document.getElementById('postContent').value;
+            const category = document.getElementById('postCategory').value;
             
-            if (storage[type].length === 0) {
-                const typeDisplay = type === 'blog' ? 'blog post' : type;
-                list.innerHTML = `<div class="empty-state">No ${type}s yet. Click "Create New" to add your first ${typeDisplay}!</div>`;
-                return;
+            if (!title || !content || !category) {
+                alert('Please fill in all fields');
+                return false;
             }
 
-            list.innerHTML = storage[type].map(item => `
-                <div class="content-item">
-                    <div class="content-item-info">
-                        <h3>${item.title}</h3>
-                        <p>${item.description.substring(0, 100)}${item.description.length > 100 ? '...' : ''}</p>
-                    </div>
-                    <div class="content-actions">
-                        <button class="btn btn-edit" onclick="editItem('${type}', ${item.id})">Edit</button>
-                        <button class="btn btn-delete" onclick="deleteItem('${type}', ${item.id})">Delete</button>
-                    </div>
-                </div>
-            `).join('');
+            // Create a slug from the title for the filename
+            const slug = title.toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+            
+            // Store the post data
+            const posts = JSON.parse(localStorage.getItem(category + '-posts') || '[]');
+            const post = {
+                id: Date.now(),
+                title: title,
+                content: content,
+                slug: slug,
+                date: new Date().toLocaleDateString(),
+                dateISO: new Date().toISOString()
+            };
+            
+            posts.push(post);
+            localStorage.setItem(category + '-posts', JSON.stringify(posts));
+            
+            // Show success message
+            alert(`Post "${title}" has been saved to ${category}!\n\nNote: In a production environment, this would create an actual HTML file in the ${category} folder.`);
+            
+            // Clear the form
+            document.getElementById('createPostForm').reset();
+            document.getElementById('previewSection').style.display = 'none';
+            
+            return false;
         }
-
-        // Initialize lists on page load
-        renderList('blog');
-        renderList('project');
-        renderList('idea');
-        renderList('update');
-
-        // Close modal when clicking outside
-        document.getElementById('contentModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
 
         // Toggle menu dropdown
         function toggleMenu() {
