@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Nekoya-sama's Ideas">
-    <title>Ideas - Nekoya-sama</title>
+    <meta name="description" content="Nekoya-sama's Updates">
+    <title>Updates - Nekoya-sama</title>
     <style>
         * {
             margin: 0;
@@ -230,65 +230,65 @@
             color: #c5ceff;
         }
 
-        .ideas-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
         }
 
-        .idea-card {
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #8a93ff, rgba(138, 147, 255, 0.2));
+        }
+
+        .update-item {
             background: rgba(15, 20, 45, 0.7);
             backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 2rem;
+            margin-bottom: 2rem;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(138, 147, 255, 0.2);
             border: 1px solid rgba(138, 147, 255, 0.2);
+            position: relative;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .idea-card:hover {
-            transform: translateY(-5px);
+        .update-item::before {
+            content: '';
+            position: absolute;
+            left: -3.5rem;
+            top: 2rem;
+            width: 12px;
+            height: 12px;
+            background: #8a93ff;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(138, 147, 255, 0.5);
+        }
+
+        .update-item:hover {
+            transform: translateX(10px);
             box-shadow: 0 15px 40px rgba(138, 147, 255, 0.3);
         }
 
-        .idea-card .icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-align: center;
+        .update-item .date {
+            color: #8a93ff;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
         }
 
-        .idea-card h2 {
+        .update-item h2 {
             color: #8a93ff;
             margin-bottom: 1rem;
             font-size: 1.5rem;
         }
 
-        .idea-card p {
+        .update-item p {
             color: #c5ceff;
-            margin-bottom: 1rem;
-        }
-
-        .idea-card .status {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .idea-card .status.concept {
-            background: rgba(138, 147, 255, 0.2);
-            color: #8a93ff;
-        }
-
-        .idea-card .status.planning {
-            background: rgba(255, 193, 7, 0.2);
-            color: #ffc107;
-        }
-
-        .idea-card .status.development {
-            background: rgba(76, 175, 80, 0.2);
-            color: #4caf50;
         }
 
         footer {
@@ -317,8 +317,12 @@
                 justify-content: center;
             }
 
-            .ideas-grid {
-                grid-template-columns: 1fr;
+            .timeline {
+                padding-left: 2rem;
+            }
+
+            .update-item::before {
+                left: -2.5rem;
             }
         }
     </style>
@@ -326,19 +330,19 @@
 <body>
     <header>
         <div class="container">
-            <a href="index.html" class="logo">
-                <img src="assets/images/49631127.jpeg" alt="Nekoya-sama Profile">
+            <a href="../home/" class="logo">
+                <img src="../assets/images/49631127.jpeg" alt="Nekoya-sama Profile">
                 <span>Nekoya-sama</span>
             </a>
             <nav>
                 <button class="menu-toggle" onclick="toggleMenu()">Menu</button>
                 <ul id="navMenu">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="ideas.html">Ideas</a></li>
-                    <li><a href="updates.html">Updates</a></li>
-                    <li class="dev-only"><a href="repositories.html">Repositories</a></li>
+                    <li><a href="../home/">Home</a></li>
+                    <li><a href="../blog/">Blog</a></li>
+                    <li><a href="../projects/">Projects</a></li>
+                    <li><a href="../ideas/">Ideas</a></li>
+                    <li><a href="../updates/">Updates</a></li>
+                    <li class="dev-only"><a href="../repositories/">Repositories</a></li>
                 </ul>
             </nav>
         </div>
@@ -347,16 +351,15 @@
     <main>
         <div class="container">
             <div class="page-header">
-                <h1>💡 Ideas</h1>
-                <p>Discover innovative concepts and solutions</p>
+                <h1>✨ Updates</h1>
+                <p>Stay tuned for the latest news and updates</p>
             </div>
 
-            <div class="ideas-grid">
-                <div class="idea-card">
-                    <div class="icon">💭</div>
-                    <h2>Future Innovations</h2>
-                    <p>This is where I share my creative ideas and concepts for future projects.</p>
-                    <span class="status concept">Concept</span>
+            <div class="timeline">
+                <div class="update-item">
+                    <div class="date">Coming Soon</div>
+                    <h2>Website Launch</h2>
+                    <p>Welcome to my personal website! More updates will be posted here as things evolve.</p>
                 </div>
             </div>
         </div>

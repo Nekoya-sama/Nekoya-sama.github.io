@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Nekoya-sama's Projects">
-    <title>Projects - Nekoya-sama</title>
+    <meta name="description" content="Nekoya-sama's Ideas">
+    <title>Ideas - Nekoya-sama</title>
     <style>
         * {
             margin: 0;
@@ -230,13 +230,13 @@
             color: #c5ceff;
         }
 
-        .projects-grid {
+        .ideas-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
         }
 
-        .project-card {
+        .idea-card {
             background: rgba(15, 20, 45, 0.7);
             backdrop-filter: blur(10px);
             border-radius: 15px;
@@ -246,47 +246,49 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .project-card:hover {
+        .idea-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 40px rgba(138, 147, 255, 0.3);
         }
 
-        .project-card h2 {
+        .idea-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .idea-card h2 {
             color: #8a93ff;
             margin-bottom: 1rem;
             font-size: 1.5rem;
         }
 
-        .project-card .tags {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
+        .idea-card p {
+            color: #c5ceff;
             margin-bottom: 1rem;
         }
 
-        .project-card .tag {
-            background: rgba(138, 147, 255, 0.2);
-            color: #8a93ff;
+        .idea-card .status {
+            display: inline-block;
             padding: 0.25rem 0.75rem;
             border-radius: 20px;
             font-size: 0.85rem;
-        }
-
-        .project-card p {
-            color: #c5ceff;
-            margin-bottom: 1rem;
-        }
-
-        .project-card .link {
-            color: #8a93ff;
-            text-decoration: none;
             font-weight: 600;
-            transition: color 0.3s ease;
         }
 
-        .project-card .link:hover {
-            color: #c5ceff;
-            text-shadow: 0 0 10px rgba(138, 147, 255, 0.5);
+        .idea-card .status.concept {
+            background: rgba(138, 147, 255, 0.2);
+            color: #8a93ff;
+        }
+
+        .idea-card .status.planning {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+        }
+
+        .idea-card .status.development {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4caf50;
         }
 
         footer {
@@ -315,7 +317,7 @@
                 justify-content: center;
             }
 
-            .projects-grid {
+            .ideas-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -324,19 +326,19 @@
 <body>
     <header>
         <div class="container">
-            <a href="index.html" class="logo">
-                <img src="assets/images/49631127.jpeg" alt="Nekoya-sama Profile">
+            <a href="../home/" class="logo">
+                <img src="../assets/images/49631127.jpeg" alt="Nekoya-sama Profile">
                 <span>Nekoya-sama</span>
             </a>
             <nav>
                 <button class="menu-toggle" onclick="toggleMenu()">Menu</button>
                 <ul id="navMenu">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="ideas.html">Ideas</a></li>
-                    <li><a href="updates.html">Updates</a></li>
-                    <li class="dev-only"><a href="repositories.html">Repositories</a></li>
+                    <li><a href="../home/">Home</a></li>
+                    <li><a href="../blog/">Blog</a></li>
+                    <li><a href="../projects/">Projects</a></li>
+                    <li><a href="../ideas/">Ideas</a></li>
+                    <li><a href="../updates/">Updates</a></li>
+                    <li class="dev-only"><a href="../repositories/">Repositories</a></li>
                 </ul>
             </nav>
         </div>
@@ -345,18 +347,16 @@
     <main>
         <div class="container">
             <div class="page-header">
-                <h1>🚀 Projects</h1>
-                <p>Explore my latest work and creative endeavors</p>
+                <h1>💡 Ideas</h1>
+                <p>Discover innovative concepts and solutions</p>
             </div>
 
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h2>Coming Soon</h2>
-                    <div class="tags">
-                        <span class="tag">Development</span>
-                        <span class="tag">Innovation</span>
-                    </div>
-                    <p>Exciting projects are in the works! Check back soon to see what I've been building.</p>
+            <div class="ideas-grid">
+                <div class="idea-card">
+                    <div class="icon">💭</div>
+                    <h2>Future Innovations</h2>
+                    <p>This is where I share my creative ideas and concepts for future projects.</p>
+                    <span class="status concept">Concept</span>
                 </div>
             </div>
         </div>
