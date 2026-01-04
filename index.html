@@ -442,10 +442,11 @@
         });
 
         // Detect dev mode (localhost, file://, or non-production domains)
+        // In production (github.io), Repositories will be hidden
         if (window.location.hostname === 'localhost' || 
             window.location.hostname === '127.0.0.1' ||
             window.location.protocol === 'file:' ||
-            window.location.hostname.includes('github.io') === false) {
+            !window.location.hostname.includes('github.io')) {
             document.body.classList.add('dev-mode');
         }
     </script>
