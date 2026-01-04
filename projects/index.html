@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Nekoya-sama's Updates">
-    <title>Updates - Nekoya-sama</title>
+    <meta name="description" content="Nekoya-sama's Projects">
+    <title>Projects - Nekoya-sama</title>
     <style>
         * {
             margin: 0;
@@ -230,65 +230,63 @@
             color: #c5ceff;
         }
 
-        .timeline {
-            position: relative;
-            padding-left: 3rem;
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
         }
 
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, #8a93ff, rgba(138, 147, 255, 0.2));
-        }
-
-        .update-item {
+        .project-card {
             background: rgba(15, 20, 45, 0.7);
             backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 2rem;
-            margin-bottom: 2rem;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(138, 147, 255, 0.2);
             border: 1px solid rgba(138, 147, 255, 0.2);
-            position: relative;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .update-item::before {
-            content: '';
-            position: absolute;
-            left: -3.5rem;
-            top: 2rem;
-            width: 12px;
-            height: 12px;
-            background: #8a93ff;
-            border-radius: 50%;
-            box-shadow: 0 0 20px rgba(138, 147, 255, 0.5);
-        }
-
-        .update-item:hover {
-            transform: translateX(10px);
+        .project-card:hover {
+            transform: translateY(-5px);
             box-shadow: 0 15px 40px rgba(138, 147, 255, 0.3);
         }
 
-        .update-item .date {
-            color: #8a93ff;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .update-item h2 {
+        .project-card h2 {
             color: #8a93ff;
             margin-bottom: 1rem;
             font-size: 1.5rem;
         }
 
-        .update-item p {
+        .project-card .tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .project-card .tag {
+            background: rgba(138, 147, 255, 0.2);
+            color: #8a93ff;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .project-card p {
             color: #c5ceff;
+            margin-bottom: 1rem;
+        }
+
+        .project-card .link {
+            color: #8a93ff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .project-card .link:hover {
+            color: #c5ceff;
+            text-shadow: 0 0 10px rgba(138, 147, 255, 0.5);
         }
 
         footer {
@@ -317,12 +315,8 @@
                 justify-content: center;
             }
 
-            .timeline {
-                padding-left: 2rem;
-            }
-
-            .update-item::before {
-                left: -2.5rem;
+            .projects-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -330,19 +324,19 @@
 <body>
     <header>
         <div class="container">
-            <a href="index.html" class="logo">
-                <img src="assets/images/49631127.jpeg" alt="Nekoya-sama Profile">
+            <a href="../home/" class="logo">
+                <img src="../assets/images/49631127.jpeg" alt="Nekoya-sama Profile">
                 <span>Nekoya-sama</span>
             </a>
             <nav>
                 <button class="menu-toggle" onclick="toggleMenu()">Menu</button>
                 <ul id="navMenu">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="ideas.html">Ideas</a></li>
-                    <li><a href="updates.html">Updates</a></li>
-                    <li class="dev-only"><a href="repositories.html">Repositories</a></li>
+                    <li><a href="../home/">Home</a></li>
+                    <li><a href="../blog/">Blog</a></li>
+                    <li><a href="../projects/">Projects</a></li>
+                    <li><a href="../ideas/">Ideas</a></li>
+                    <li><a href="../updates/">Updates</a></li>
+                    <li class="dev-only"><a href="../repositories/">Repositories</a></li>
                 </ul>
             </nav>
         </div>
@@ -351,15 +345,18 @@
     <main>
         <div class="container">
             <div class="page-header">
-                <h1>✨ Updates</h1>
-                <p>Stay tuned for the latest news and updates</p>
+                <h1>🚀 Projects</h1>
+                <p>Explore my latest work and creative endeavors</p>
             </div>
 
-            <div class="timeline">
-                <div class="update-item">
-                    <div class="date">Coming Soon</div>
-                    <h2>Website Launch</h2>
-                    <p>Welcome to my personal website! More updates will be posted here as things evolve.</p>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h2>Coming Soon</h2>
+                    <div class="tags">
+                        <span class="tag">Development</span>
+                        <span class="tag">Innovation</span>
+                    </div>
+                    <p>Exciting projects are in the works! Check back soon to see what I've been building.</p>
                 </div>
             </div>
         </div>
