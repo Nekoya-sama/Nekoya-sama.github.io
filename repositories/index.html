@@ -544,7 +544,15 @@
             
             if (previewSection.style.display === 'none') {
                 previewSection.style.display = 'block';
-                previewContent.innerHTML = contentInput.value;
+                // Use DOMParser to safely parse and display HTML content
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(contentInput.value, 'text/html');
+                // Clear previous content
+                previewContent.innerHTML = '';
+                // Append parsed content (scripts won't execute)
+                Array.from(doc.body.childNodes).forEach(node => {
+                    previewContent.appendChild(node.cloneNode(true));
+                });
             } else {
                 previewSection.style.display = 'none';
             }
@@ -563,9 +571,14 @@
             }
 
             // Create a slug from the title for the filename
-            const slug = title.toLowerCase()
+            let slug = title.toLowerCase()
                 .replace(/[^a-z0-9]+/g, '-')
                 .replace(/^-+|-+$/g, '');
+            
+            // If slug is empty (e.g., title has only special characters), use timestamp
+            if (!slug) {
+                slug = 'post-' + Date.now();
+            }
             
             // Store the post data
             const posts = JSON.parse(localStorage.getItem(category + '-posts') || '[]');
