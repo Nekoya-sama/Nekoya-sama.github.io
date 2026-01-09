@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Create New Posts for Nekoya-sama's Website">
-    <title>Create Post - Nekoya-sama</title>
+    <meta name="description" content="Nekoya-sama's Waifu Generator">
+    <title>Waifu Generator - Nekoya-sama</title>
     <style>
         * {
             margin: 0;
@@ -230,201 +230,111 @@
             color: #c5ceff;
         }
 
-        .repo-section {
+        .waifu-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .waifu-display {
             background: rgba(15, 20, 45, 0.7);
             backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 2rem;
-            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(138, 147, 255, 0.2);
+            border: 1px solid rgba(138, 147, 255, 0.2);
+            text-align: center;
+        }
+
+        .waifu-avatar {
+            width: 250px;
+            height: 250px;
+            margin: 0 auto 2rem;
+            background: linear-gradient(135deg, #8a93ff 0%, #5a67d8 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            box-shadow: 0 10px 40px rgba(138, 147, 255, 0.5);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .waifu-name {
+            font-size: 2rem;
+            color: #8a93ff;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 15px rgba(138, 147, 255, 0.5);
+        }
+
+        .waifu-details {
+            background: rgba(15, 20, 45, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(138, 147, 255, 0.2);
             border: 1px solid rgba(138, 147, 255, 0.2);
         }
 
-        .repo-section h2 {
+        .detail-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-section h3 {
             color: #8a93ff;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .repo-section .icon {
-            font-size: 2rem;
-        }
-
-        .content-list {
-            margin-bottom: 1.5rem;
-        }
-
-        .content-item {
-            background: rgba(20, 25, 55, 0.6);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid rgba(138, 147, 255, 0.1);
-        }
-
-        .content-item-info h3 {
-            color: #8a93ff;
-            font-size: 1.1rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .content-item-info p {
-            color: #c5ceff;
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        .content-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .btn {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 5px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #8a93ff 0%, #5a67d8 100%);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(138, 147, 255, 0.4);
-        }
-
-        .btn-edit {
-            background: rgba(255, 193, 7, 0.2);
-            color: #ffc107;
-            border: 1px solid #ffc107;
-        }
-
-        .btn-edit:hover {
-            background: rgba(255, 193, 7, 0.3);
-        }
-
-        .btn-delete {
-            background: rgba(244, 67, 54, 0.2);
-            color: #f44336;
-            border: 1px solid #f44336;
-        }
-
-        .btn-delete:hover {
-            background: rgba(244, 67, 54, 0.3);
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 2rem;
-            color: #c5ceff;
-            opacity: 0.7;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: rgba(15, 20, 45, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 2rem;
-            max-width: 600px;
-            width: 90%;
-            border: 1px solid rgba(138, 147, 255, 0.2);
-        }
-
-        .modal-content h3 {
-            color: #8a93ff;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            color: #c5ceff;
             margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 0.75rem;
-            background: rgba(20, 25, 55, 0.6);
-            border: 1px solid rgba(138, 147, 255, 0.2);
-            border-radius: 5px;
-            color: #c5ceff;
-            font-family: inherit;
-        }
-
-        .form-group select {
-            cursor: pointer;
-        }
-
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-            font-family: 'Courier New', monospace;
-        }
-
-        .preview-section {
-            background: rgba(20, 25, 55, 0.6);
-            border: 1px solid rgba(138, 147, 255, 0.2);
-            border-radius: 5px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .preview-section h3 {
-            color: #8a93ff;
-            margin-bottom: 1rem;
             font-size: 1.2rem;
         }
 
-        .preview-content {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1rem;
-            border-radius: 5px;
-            min-height: 100px;
+        .detail-section p {
             color: #c5ceff;
+            line-height: 1.8;
         }
 
-        .form-actions {
+        .trait-tags {
             display: flex;
-            gap: 1rem;
-            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .trait-tag {
+            background: rgba(138, 147, 255, 0.2);
+            color: #8a93ff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(138, 147, 255, 0.3);
+        }
+
+        .generate-btn {
+            display: block;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            background: linear-gradient(135deg, #8a93ff 0%, #5a67d8 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 20px rgba(138, 147, 255, 0.3);
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(138, 147, 255, 0.6), 0 0 30px rgba(138, 147, 255, 0.4);
+        }
+
+        .generate-btn:active {
+            transform: translateY(0px);
         }
 
         footer {
@@ -447,21 +357,14 @@
                 font-size: 2rem;
             }
 
-            nav ul {
-                gap: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
+            .waifu-container {
+                grid-template-columns: 1fr;
             }
 
-            .content-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-            }
-
-            .modal-content {
-                width: 95%;
-                padding: 1.5rem;
+            .waifu-avatar {
+                width: 200px;
+                height: 200px;
+                font-size: 6rem;
             }
         }
     </style>
@@ -491,43 +394,45 @@
     <main>
         <div class="container">
             <div class="page-header">
-                <h1>✏️ Create a New Post</h1>
-                <p>Create and publish content to your website</p>
+                <h1>✨ Waifu Generator</h1>
+                <p>Create your perfect anime character with unique traits and personality!</p>
             </div>
 
-            <!-- Create Post Form -->
-            <div class="repo-section">
-                <h2><span class="icon">📝</span> New Post</h2>
-                <form id="createPostForm" onsubmit="return handleCreatePost(event)">
-                    <div class="form-group">
-                        <label for="postTitle">Title</label>
-                        <input type="text" id="postTitle" placeholder="Enter the title for your new page" required>
+            <div class="waifu-container">
+                <div class="waifu-display">
+                    <div class="waifu-avatar" id="waifuAvatar">👧</div>
+                    <div class="waifu-name" id="waifuName">Click Generate!</div>
+                </div>
+
+                <div class="waifu-details">
+                    <div class="detail-section">
+                        <h3>💫 Appearance</h3>
+                        <p id="appearance">Generate a waifu to see details...</p>
                     </div>
-                    <div class="form-group">
-                        <label for="postContent">Content (HTML)</label>
-                        <textarea id="postContent" placeholder="Enter HTML content for your page" required></textarea>
+
+                    <div class="detail-section">
+                        <h3>💖 Personality</h3>
+                        <p id="personality">Generate a waifu to see details...</p>
                     </div>
-                    <div class="form-actions" style="margin-bottom: 1rem;">
-                        <button type="button" class="btn btn-edit" onclick="togglePreview()">👁️ Toggle Preview</button>
+
+                    <div class="detail-section">
+                        <h3>🎭 Character Traits</h3>
+                        <div class="trait-tags" id="traits"></div>
                     </div>
-                    <div id="previewSection" class="preview-section" style="display: none;">
-                        <h3>Preview</h3>
-                        <div id="previewContent" class="preview-content"></div>
+
+                    <div class="detail-section">
+                        <h3>⚡ Special Ability</h3>
+                        <p id="ability">Generate a waifu to see details...</p>
                     </div>
-                    <div class="form-group">
-                        <label for="postCategory">Category</label>
-                        <select id="postCategory" required>
-                            <option value="">Select a category</option>
-                            <option value="blog">Blog</option>
-                            <option value="ideas">Ideas</option>
-                            <option value="projects">Projects</option>
-                        </select>
+
+                    <div class="detail-section">
+                        <h3>📖 Background</h3>
+                        <p id="background">Generate a waifu to see details...</p>
                     </div>
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Publish Post</button>
-                    </div>
-                </form>
+                </div>
             </div>
+
+            <button class="generate-btn" onclick="generateWaifu()">🎲 Generate New Waifu</button>
         </div>
     </main>
 
@@ -538,71 +443,117 @@
     </footer>
 
     <script>
-        function togglePreview() {
-            const previewSection = document.getElementById('previewSection');
-            const contentInput = document.getElementById('postContent');
-            const previewContent = document.getElementById('previewContent');
-            
-            if (previewSection.style.display === 'none') {
-                previewSection.style.display = 'block';
-                // Use DOMParser to safely parse and display HTML content
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(contentInput.value, 'text/html');
-                // Clear previous content
-                previewContent.innerHTML = '';
-                // Append parsed content (scripts won't execute)
-                Array.from(doc.body.childNodes).forEach(node => {
-                    previewContent.appendChild(node.cloneNode(true));
-                });
-            } else {
-                previewSection.style.display = 'none';
-            }
+        // Waifu generation data
+        const waifuData = {
+            names: [
+                'Sakura', 'Yuki', 'Hana', 'Aiko', 'Rei', 'Mio', 'Natsuki', 'Haruka',
+                'Mei', 'Yui', 'Akane', 'Rin', 'Kaori', 'Sora', 'Asuka', 'Miku',
+                'Luna', 'Yume', 'Kohana', 'Tsuki', 'Hoshi', 'Akari', 'Nao', 'Kira'
+            ],
+            hairColors: [
+                'silver hair', 'pink hair', 'blue hair', 'purple hair', 'blonde hair',
+                'black hair', 'red hair', 'white hair', 'green hair', 'rainbow hair'
+            ],
+            eyeColors: [
+                'emerald green eyes', 'sapphire blue eyes', 'ruby red eyes', 'golden eyes',
+                'violet eyes', 'amber eyes', 'silver eyes', 'heterochromatic eyes'
+            ],
+            hairStyles: [
+                'long flowing hair', 'twin tails', 'short bobcut', 'ponytail',
+                'braided hair', 'curly hair', 'straight hair with bangs'
+            ],
+            heights: [
+                'petite (150cm)', 'average (160cm)', 'tall (170cm)'
+            ],
+            personalities: [
+                'Cheerful and energetic, always bringing joy to everyone around her. She loves making new friends and spreading positivity.',
+                'Calm and mysterious, with a deep wisdom beyond her years. She often contemplates the mysteries of the universe.',
+                'Shy and gentle, but incredibly kind-hearted. Once you get to know her, she\'s the most loyal friend you could have.',
+                'Confident and bold, never backing down from a challenge. She\'s a natural leader who inspires others.',
+                'Playful and mischievous, always up to something fun. Her pranks are legendary but never mean-spirited.',
+                'Intellectual and curious, constantly seeking knowledge. She can talk for hours about her favorite subjects.',
+                'Caring and protective, like a big sister to everyone. She always puts others\' needs before her own.',
+                'Cool and composed, rarely showing her emotions. But beneath that exterior lies a warm heart.'
+            ],
+            traits: [
+                'Athletic', 'Bookworm', 'Gamer', 'Artist', 'Musician', 'Chef',
+                'Fashionista', 'Tech-savvy', 'Nature lover', 'Stargazer',
+                'Adventurous', 'Perfectionist', 'Dreamer', 'Optimistic'
+            ],
+            abilities: [
+                'Can manipulate water and create beautiful ice sculptures',
+                'Has the power to heal others with her touch',
+                'Can communicate with animals and understand their feelings',
+                'Masters illusion magic and can create stunning visual displays',
+                'Controls wind and can fly through the skies',
+                'Has super speed and incredible reflexes',
+                'Can see the future in her dreams',
+                'Has telepathic abilities and can read emotions',
+                'Controls plant life and makes flowers bloom instantly',
+                'Can manipulate time for brief moments'
+            ],
+            backgrounds: [
+                'Comes from a prestigious magical academy in the clouds where she was the top student.',
+                'Grew up in a peaceful village surrounded by ancient forests and mystical creatures.',
+                'Trained as a warrior princess in a distant kingdom, mastering both combat and diplomacy.',
+                'Was raised by a wise sage who taught her the secrets of the universe.',
+                'Discovered her powers while exploring ancient ruins and searching for lost artifacts.',
+                'Lived a normal life until a mysterious event awakened her hidden abilities.',
+                'Traveled through many worlds and dimensions, gathering knowledge and experience.',
+                'Was chosen by the spirits of nature to be their guardian and protector.'
+            ],
+            emojis: ['👧', '👩', '🧝‍♀️', '👸', '🥷', '🧙‍♀️', '💃', '🎀', '🌸', '⭐', '✨', '💖']
+        };
+
+        function getRandomElement(array) {
+            return array[Math.floor(Math.random() * array.length)];
         }
 
-        function handleCreatePost(event) {
-            event.preventDefault();
-            
-            const title = document.getElementById('postTitle').value;
-            const content = document.getElementById('postContent').value;
-            const category = document.getElementById('postCategory').value;
-            
-            if (!title || !content || !category) {
-                alert('Please fill in all fields');
-                return false;
-            }
+        function getRandomTraits(count = 3) {
+            const shuffled = [...waifuData.traits].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
 
-            // Create a slug from the title for the filename
-            let slug = title.toLowerCase()
-                .replace(/[^a-z0-9]+/g, '-')
-                .replace(/^-+|-+$/g, '');
+        function generateWaifu() {
+            // Generate random waifu characteristics
+            const name = getRandomElement(waifuData.names);
+            const hairColor = getRandomElement(waifuData.hairColors);
+            const eyeColor = getRandomElement(waifuData.eyeColors);
+            const hairStyle = getRandomElement(waifuData.hairStyles);
+            const height = getRandomElement(waifuData.heights);
+            const personality = getRandomElement(waifuData.personalities);
+            const traits = getRandomTraits();
+            const ability = getRandomElement(waifuData.abilities);
+            const background = getRandomElement(waifuData.backgrounds);
+            const emoji = getRandomElement(waifuData.emojis);
+
+            // Update the display
+            document.getElementById('waifuAvatar').textContent = emoji;
+            document.getElementById('waifuName').textContent = name;
             
-            // If slug is empty (e.g., title has only special characters), use timestamp
-            if (!slug) {
-                slug = 'post-' + Date.now();
-            }
+            document.getElementById('appearance').textContent = 
+                `She has ${hairColor} styled in ${hairStyle}, complemented by her ${eyeColor}. She stands at ${height}.`;
             
-            // Store the post data
-            const posts = JSON.parse(localStorage.getItem(category + '-posts') || '[]');
-            const post = {
-                id: Date.now(),
-                title: title,
-                content: content,
-                slug: slug,
-                date: new Date().toLocaleDateString(),
-                dateISO: new Date().toISOString()
-            };
+            document.getElementById('personality').textContent = personality;
             
-            posts.push(post);
-            localStorage.setItem(category + '-posts', JSON.stringify(posts));
+            const traitsContainer = document.getElementById('traits');
+            traitsContainer.innerHTML = '';
+            traits.forEach(trait => {
+                const tag = document.createElement('span');
+                tag.className = 'trait-tag';
+                tag.textContent = trait;
+                traitsContainer.appendChild(tag);
+            });
             
-            // Show success message
-            alert(`Post "${title}" has been saved to ${category}!\n\nNote: In a production environment, this would create an actual HTML file in the ${category} folder.`);
-            
-            // Clear the form
-            document.getElementById('createPostForm').reset();
-            document.getElementById('previewSection').style.display = 'none';
-            
-            return false;
+            document.getElementById('ability').textContent = ability;
+            document.getElementById('background').textContent = background;
+
+            // Add animation
+            const avatar = document.getElementById('waifuAvatar');
+            avatar.style.animation = 'none';
+            setTimeout(() => {
+                avatar.style.animation = 'float 3s ease-in-out infinite';
+            }, 10);
         }
 
         // Toggle menu dropdown
@@ -626,13 +577,15 @@
         });
 
         // Detect dev mode (localhost, file://, or non-production domains)
-        // In production (github.io), Repositories will be hidden
         if (window.location.hostname === 'localhost' || 
             window.location.hostname === '127.0.0.1' ||
             window.location.protocol === 'file:' ||
             !window.location.hostname.includes('github.io')) {
             document.body.classList.add('dev-mode');
         }
+
+        // Generate initial waifu on page load
+        window.addEventListener('load', generateWaifu);
     </script>
 </body>
 </html>
